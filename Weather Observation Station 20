@@ -1,0 +1,5 @@
+ with cte as
+(
+    select row_number() over (order by lat_n asc) r, lat_n from station
+)
+select round(lat_n,4) from cte where r=(select  ceil(count(*)/2) from station)
