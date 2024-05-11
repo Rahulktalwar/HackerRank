@@ -1,0 +1,8 @@
+select round(x.long_w,4)
+from (
+select lat_n, long_w
+from station
+where lat_n < 137.2345
+order by lat_n desc
+limit 1
+    )x
