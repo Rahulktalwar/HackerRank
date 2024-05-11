@@ -1,0 +1,5 @@
+select months*salary as tot, count(*)
+from employee
+group by tot
+order by tot desc 
+limit 1
