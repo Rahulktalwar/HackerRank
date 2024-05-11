@@ -1,0 +1,18 @@
+with num as (
+select h.hacker_id as hacker_id, h.name as name,  count(c.challenge_id)  as num_challenges
+    from hackers h 
+    join challenges c on c.hacker_id=h.hacker_id
+    group by h.hacker_id, h.name
+ )
+  , cnt as (
+ select num_challenges, count(num_challenges) as cnt_ch
+  from num 
+  group by num_challenges
+   )
+   
+   select n.hacker_id, n.name, n.num_challenges
+   from num n
+   join cnt c on c.num_challenges=n.num_challenges
+   where c.cnt_ch=1
+   or n.num_challenges = (select max(num_challenges) from num)
+   order by n.num_challenges desc, n.hacker_id 
