@@ -1,0 +1,7 @@
+select  A.x, A.y 
+from functions A
+join functions B on A.x=B.y and B.x=A.y
+group by A.x, A.y
+ having A.x<A.y or count(A.x)>1
+order by A.x ;
+ 
