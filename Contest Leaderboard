@@ -1,0 +1,16 @@
+select x.a, x.b, sum(x.m) as r
+from
+ (select h.hacker_id as a,
+  h.name as b,
+  s.challenge_id as c,
+  max(s.score) as m
+ from hackers h 
+join submissions s on s.hacker_id=h.hacker_id
+ group by h.hacker_id,h.name,s.challenge_id) x
+ group by x.a, x.b
+ having r<>0
+ order by r desc, x.a  
+   
+ 
+ 
+ 
